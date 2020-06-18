@@ -40,9 +40,29 @@ $(".saveBtn").on("click", function () {
 
 //rotate classes accordingly to past present and future
 function updatecolors() {
+    var currentH = moment().hours();
 
+    $(".time-block").each(function(){
+        //temp = temp.split(":");
 
+        var blockH = parseInt($(this).attr("id"));
+        console.log("Block hour: "+blockH);
+        
+        if(blockH < currentH){
+            $(this).addClass("past");
+        }
+        else if(blockH === currentH){
+            $(this).removeClass("past");
+            $(this).addClass("present");
+        }
+        else{
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+            $(this).addClass("future");
+        }
+    })
 }
+
 
 //initial function to show any local storage 
 //and update which rows must be color coded
@@ -56,16 +76,6 @@ function init() {
 console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
 
-//if hour is before moment
-// if(){
-// $(".row").addClass("past");
-// } if()
-// //if hour the same as moment
-// $(".row").addClass("present");
-// } else
-// //if hour is after moment
-// $(".row").addClass("future");
-// }
 
 
 init()
